@@ -166,9 +166,13 @@ export const useFinanceStore = defineStore('finance', {
     
     // Utilities
     recalculateTotals() {
-      const assetTypes = ['asset', 'checking', 'investment', 'reserve']
+      const availableTypes = ['asset', 'checking']
       const debtTypes = ['debt', 'credit_card', 'loan']
-      this.balance = this.accounts.filter(a => assetTypes.includes(a.type)).reduce((acc, a) => acc + a.balance, 0)
+      
+      this.balance = this.accounts.filter(a => 
+        availableTypes.includes(a.type) && !a.isInvestment && !a.name.toLowerCase().includes('reserva')
+      ).reduce((acc, a) => acc + a.balance, 0)
+      
       this.debts = this.accounts.filter(a => debtTypes.includes(a.type)).reduce((acc, a) => acc + a.balance, 0)
     }
   },

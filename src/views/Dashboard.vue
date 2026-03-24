@@ -31,7 +31,9 @@
         <div class="relative z-10">
           <p class="text-3xl font-bold text-white">{{ formatCurrency(financeStore.balance) }}</p>
           <div class="flex items-center gap-2 mt-2 text-sm">
-            <span class="text-slate-400">Distribuído em {{ financeStore.accounts.filter(a => a.type === 'asset').length }} contas</span>
+            <span class="text-slate-400">
+              Pronto para uso em {{ financeStore.accounts.filter(a => ['asset', 'checking'].includes(a.type) && !a.isInvestment && !a.name.toLowerCase().includes('reserva')).length }} contas
+            </span>
           </div>
         </div>
       </div>
