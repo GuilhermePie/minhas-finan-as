@@ -37,9 +37,6 @@ export const useFinanceStore = defineStore('finance', {
     payDebtInstallment(id, amount, sourceAccountId) {
       const debt = this.accounts.find(a => a.id === id)
       if (debt && ['debt', 'credit_card', 'loan'].includes(debt.type)) {
-        const sourceAcc = this.accounts.find(a => a.id === sourceAccountId)
-        if (sourceAcc) sourceAcc.balance -= amount
-
         let desc = `Pagamento: ${debt.name}`
         if (debt.isInstallment && debt.totalInstallments) {
           desc += ` (${debt.currentInstallment}/${debt.totalInstallments})`
@@ -50,7 +47,8 @@ export const useFinanceStore = defineStore('finance', {
           amount: amount,
           category: 'Contas',
           date: new Date().toISOString().split('T')[0],
-          description: desc
+          description: desc,
+          accountId: sourceAccountId
         })
 
         debt.balance -= amount
@@ -74,17 +72,52 @@ export const useFinanceStore = defineStore('finance', {
 
     // Transactions
     addTransaction(transaction) {
+      if (transaction.accountId) {
+        const acc = this.accounts.find(a => a.id === transaction.accountId)
+        if (acc) {
+          if (transaction.type === 'income') acc.balance += transaction.amount
+          else acc.balance -= transaction.amount
+        }
+      }
       this.transactions.push({ id: Date.now(), ...transaction })
       this.recalculateTotals()
     },
     editTransaction(id, updatedTransaction) {
       const index = this.transactions.findIndex(t => t.id === id)
       if (index !== -1) {
-        this.transactions[index] = { ...this.transactions[index], ...updatedTransaction }
+        const oldT = this.transactions[index]
+        
+        // Revert old transaction effect
+        if (oldT.accountId) {
+          const oldAcc = this.accounts.find(a => a.id === oldT.accountId)
+          if (oldAcc) {
+            if (oldT.type === 'income') oldAcc.balance -= oldT.amount
+            else oldAcc.balance += oldT.amount
+          }
+        }
+        
+        // Apply new transaction effect
+        if (updatedTransaction.accountId) {
+          const newAcc = this.accounts.find(a => a.id === updatedTransaction.accountId)
+          if (newAcc) {
+            if (updatedTransaction.type === 'income') newAcc.balance += updatedTransaction.amount
+            else newAcc.balance -= updatedTransaction.amount
+          }
+        }
+
+        this.transactions[index] = { ...oldT, ...updatedTransaction }
         this.recalculateTotals()
       }
     },
     deleteTransaction(id) {
+      const t = this.transactions.find(t => t.id === id)
+      if (t && t.accountId) {
+        const acc = this.accounts.find(a => a.id === t.accountId)
+        if (acc) {
+          if (t.type === 'income') acc.balance -= t.amount
+          else acc.balance += t.amount
+        }
+      }
       this.transactions = this.transactions.filter(t => t.id !== id)
       this.recalculateTotals()
     },
@@ -105,11 +138,6 @@ export const useFinanceStore = defineStore('finance', {
     markBillAsPaid(billId, sourceAccountId) {
       const bill = this.bills.find(b => b.id === billId)
       if (bill && !bill.paid) {
-
-        const sourceAcc = this.accounts.find(a => a.id === sourceAccountId)
-        if (sourceAcc) sourceAcc.balance -= bill.amount
-
-
         let desc = `Pagamento: ${bill.name}`
         if (bill.isInstallment && bill.totalInstallments) {
           desc += ` (${bill.currentInstallment}/${bill.totalInstallments})`
@@ -120,7 +148,8 @@ export const useFinanceStore = defineStore('finance', {
           amount: bill.amount,
           category: 'Contas',
           date: new Date().toISOString().split('T')[0],
-          description: desc
+          description: desc,
+          accountId: sourceAccountId
         })
 
         if (bill.isInstallment && bill.currentInstallment < bill.totalInstallments) {

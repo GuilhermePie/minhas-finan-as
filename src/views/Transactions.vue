@@ -153,6 +153,20 @@
           </div>
         </div>
 
+        <div>
+          <label class="block text-sm font-medium text-slate-400 mb-1">Conta de Origem/Destino</label>
+          <select 
+            v-model="form.accountId"
+            required
+            class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-colors appearance-none mb-4"
+          >
+            <option value="" disabled>Selecione uma conta</option>
+            <option v-for="acc in financeStore.accounts.filter(a => ['asset', 'checking', 'investment', 'reserve'].includes(a.type))" :key="acc.id" :value="acc.id">
+              {{ acc.name }}
+            </option>
+          </select>
+        </div>
+
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label class="block text-sm font-medium text-slate-400 mb-1">Categoria</label>
@@ -282,20 +296,33 @@ const form = ref({
   description: '',
   type: 'expense',
   amount: 0,
+  accountId: '',
   category: '',
   date: new Date().toISOString().split('T')[0]
 })
 
 const openModal = (transaction = null) => {
+  if (financeStore.accounts.filter(a => ['asset', 'checking', 'investment', 'reserve'].includes(a.type)).length === 0) {
+    Swal.fire({
+      title: 'Aviso',
+      text: 'Você precisa ter pelo menos uma Conta criada para adicionar transações.',
+      icon: 'warning',
+      background: '#1e293b',
+      color: '#f8fafc'
+    })
+    return
+  }
+
   if (transaction) {
     editingTransaction.value = transaction
-    form.value = { ...transaction }
+    form.value = { ...transaction, accountId: transaction.accountId || '' }
   } else {
     editingTransaction.value = null
     form.value = { 
       description: '', 
       type: 'expense', 
       amount: 0, 
+      accountId: '',
       category: '', 
       date: new Date().toISOString().split('T')[0] 
     }
