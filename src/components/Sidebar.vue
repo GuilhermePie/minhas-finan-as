@@ -1,5 +1,5 @@
 <template>
-  <aside class="w-64 border-r border-dark-800 bg-dark-900/80 backdrop-blur flex flex-col transition-all duration-300">
+  <aside class="w-64 border-r border-dark-800 bg-dark-900 lg:bg-dark-900/80 backdrop-blur flex flex-col transition-all duration-300">
     <div class="p-6 flex items-center gap-3">
       <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center shadow-lg shadow-primary-500/20">
         <Wallet class="w-5 h-5 text-white" />
