@@ -5,7 +5,7 @@ const routes = [
   { path: '/accounts', component: () => import('../views/Accounts.vue') },
   { path: '/transactions', component: () => import('../views/Transactions.vue') },
   { path: '/monthly', component: () => import('../views/MonthlyExpenses.vue') },
-  { path: '/bills', component: () => import('../views/Bills.vue') }
+  { path: '/fixed-expenses', component: () => import('../views/FixedExpenses.vue') }
 ]
 
 export const router = createRouter({

@@ -2,54 +2,54 @@
   <div class="space-y-6">
     <!-- Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 shadow-sm relative overflow-hidden">
+      <div class="bg-app-surface rounded-2xl p-6 border border-app-border shadow-sm relative overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-bl-full blur-[20px] -mr-10 -mt-10"></div>
         <div class="flex items-center justify-between mb-4 relative z-10">
-          <h3 class="text-slate-400 font-medium text-sm">Dinheiro Guardado / Investido</h3>
+          <h3 class="text-content-muted font-medium text-sm">Dinheiro Guardado / Investido</h3>
           <div class="w-10 h-10 rounded-full bg-primary-500/10 flex items-center justify-center text-primary-500">
             <PiggyBank class="w-5 h-5" />
           </div>
         </div>
         <div class="relative z-10">
-          <p class="text-3xl font-bold text-white">{{ formatCurrency(investedBalance) }}</p>
+          <p class="text-3xl font-bold text-content-main">{{ formatCurrency(investedBalance) }}</p>
           <div class="flex items-center gap-2 mt-2 text-sm">
             <TrendingUp class="w-4 h-4 text-success" />
             <span class="text-success">Rendendo</span>
-            <span class="text-slate-500">nas suas reservas</span>
+            <span class="text-content-faint">nas suas reservas</span>
           </div>
         </div>
       </div>
 
-      <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 shadow-sm relative overflow-hidden">
+      <div class="bg-app-surface rounded-2xl p-6 border border-app-border shadow-sm relative overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-success/10 rounded-bl-full blur-[20px] -mr-10 -mt-10"></div>
         <div class="flex items-center justify-between mb-4 relative z-10">
-          <h3 class="text-slate-400 font-medium text-sm">Total Disponível</h3>
+          <h3 class="text-content-muted font-medium text-sm">Total Disponível</h3>
           <div class="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center text-success">
             <ArrowUpRight class="w-5 h-5" />
           </div>
         </div>
         <div class="relative z-10">
-          <p class="text-3xl font-bold text-white">{{ formatCurrency(financeStore.balance) }}</p>
+          <p class="text-3xl font-bold text-content-main">{{ formatCurrency(financeStore.balance) }}</p>
           <div class="flex items-center gap-2 mt-2 text-sm">
-            <span class="text-slate-400">
+            <span class="text-content-muted">
               Pronto para uso em {{ financeStore.accounts.filter(a => ['asset', 'checking'].includes(a.type) && !a.isInvestment && !a.name.toLowerCase().includes('reserva')).length }} contas
             </span>
           </div>
         </div>
       </div>
 
-      <div class="bg-dark-800 rounded-2xl p-6 border border-dark-700 shadow-sm relative overflow-hidden">
+      <div class="bg-app-surface rounded-2xl p-6 border border-app-border shadow-sm relative overflow-hidden">
         <div class="absolute top-0 right-0 w-32 h-32 bg-danger/10 rounded-bl-full blur-[20px] -mr-10 -mt-10"></div>
         <div class="flex items-center justify-between mb-4 relative z-10">
-          <h3 class="text-slate-400 font-medium text-sm">Total em Dívidas</h3>
+          <h3 class="text-content-muted font-medium text-sm">Total em Dívidas</h3>
           <div class="w-10 h-10 rounded-full bg-danger/10 flex items-center justify-center text-danger">
             <ArrowDownRight class="w-5 h-5" />
           </div>
         </div>
         <div class="relative z-10">
-          <p class="text-3xl font-bold text-white">{{ formatCurrency(financeStore.debts) }}</p>
+          <p class="text-3xl font-bold text-content-main">{{ formatCurrency(financeStore.debts) }}</p>
           <div class="flex items-center gap-2 mt-2 text-sm">
-            <span class="text-slate-400">Cartões e financiamentos</span>
+            <span class="text-content-muted">Cartões e financiamentos</span>
           </div>
         </div>
       </div>
@@ -57,14 +57,14 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <!-- Recent Transactions -->
-      <div class="col-span-1 lg:col-span-2 bg-dark-800 rounded-2xl p-6 border border-dark-700 shadow-sm">
+      <div class="col-span-1 lg:col-span-2 bg-app-surface rounded-2xl p-6 border border-app-border shadow-sm">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-lg font-semibold text-white">Transações Recentes</h2>
+          <h2 class="text-lg font-semibold text-content-main">Transações Recentes</h2>
           <router-link to="/transactions" class="text-sm font-medium text-primary-500 hover:text-primary-400">Ver todas</router-link>
         </div>
         
         <div class="space-y-4">
-          <div v-for="t in financeStore.transactions.slice(0, 4)" :key="t.id" class="flex items-center justify-between p-4 rounded-xl hover:bg-dark-700/50 transition-colors border border-transparent hover:border-dark-600">
+          <div v-for="t in financeStore.transactions.slice(0, 4)" :key="t.id" class="flex items-center justify-between p-4 rounded-xl hover:bg-app-surface-hover/50 transition-colors border border-transparent hover:border-app-border-hover">
             <div class="flex items-center gap-4">
               <div 
                 class="w-12 h-12 rounded-full flex items-center justify-center"
@@ -74,8 +74,8 @@
                 <ArrowUpRight v-else class="w-6 h-6" />
               </div>
               <div>
-                <p class="font-medium text-white">{{ t.description }}</p>
-                <p class="text-xs text-slate-400">{{ t.category }} • {{ formatDate(t.date) }}</p>
+                <p class="font-medium text-content-main">{{ t.description }}</p>
+                <p class="text-xs text-content-muted">{{ t.category }} • {{ formatDate(t.date) }}</p>
               </div>
             </div>
             <div class="text-right">
@@ -88,31 +88,59 @@
       </div>
 
       <!-- Upcoming Bills -->
-      <div class="col-span-1 bg-dark-800 rounded-2xl p-6 border border-dark-700 shadow-sm flex flex-col">
+      <div class="col-span-1 bg-app-surface rounded-2xl p-6 border border-app-border shadow-sm flex flex-col">
         <div class="flex justify-between items-center mb-6">
-          <h2 class="text-lg font-semibold text-white">Próximas Contas</h2>
-          <router-link to="/bills" class="text-sm font-medium text-primary-500 hover:text-primary-400">Ver todas</router-link>
+          <h2 class="text-lg font-semibold text-content-main">Próximas Contas</h2>
+          <router-link to="/fixed-expenses" class="text-sm font-medium text-primary-500 hover:text-primary-400">Ver todas</router-link>
         </div>
 
         <div class="space-y-4 flex-1">
-          <div v-for="bill in financeStore.upcomingBills.slice(0, 3)" :key="bill.id" class="flex items-center justify-between p-4 rounded-xl border border-dark-700 bg-dark-900/50">
+          <div v-for="bill in financeStore.upcomingBills.slice(0, 3)" :key="bill.id" class="flex items-center justify-between p-4 rounded-xl border border-app-border bg-app-bg/50">
             <div>
-              <p class="font-medium text-white">{{ bill.name }}</p>
-              <p class="text-xs flex items-center gap-1 mt-1" :class="isLate(bill.dueDate) ? 'text-danger' : 'text-slate-400'">
+              <p class="font-medium text-content-main">{{ bill.name }}</p>
+              <p class="text-xs flex items-center gap-1 mt-1" :class="isLate(bill.dueDate) ? 'text-danger' : 'text-content-muted'">
                 <Calendar class="w-3 h-3" /> 
                 {{ isLate(bill.dueDate) ? 'Venceu em' : 'Vence em' }} {{ formatDate(bill.dueDate) }}
               </p>
             </div>
             <div class="text-right flex flex-col items-end">
-              <p class="font-bold text-white">{{ formatCurrency(bill.amount || bill.balance) }}</p>
-              <button @click="handlePayment(bill, bill.itemType)" class="text-xs font-medium px-3 py-1 bg-primary-600 hover:bg-primary-500 text-white rounded-md mt-2 transition-colors">
+              <p class="font-bold text-content-main">{{ formatCurrency(bill.amount || bill.balance) }}</p>
+              <button @click="handlePayment(bill, bill.itemType)" class="text-xs font-medium px-3 py-1 bg-primary-600-white rounded-md mt-2 transition-colors">
                 Pagar
               </button>
             </div>
           </div>
-          <div v-if="financeStore.upcomingBills.length === 0" class="text-center py-6 text-slate-400 text-sm h-full flex items-center justify-center flex-col gap-2">
+          <div v-if="financeStore.upcomingBills.length === 0" class="text-center py-6 text-content-muted text-sm h-full flex items-center justify-center flex-col gap-2">
             <span class="text-2xl">🎉</span>
             Nenhuma conta pendente!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Budgets Overview -->
+    <div v-if="(financeStore.budgets || []).length > 0" class="bg-app-surface rounded-2xl p-6 border border-app-border shadow-sm">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-lg font-semibold text-content-main">Metas do Mês</h2>
+        <router-link to="/monthly" class="text-sm font-medium text-primary-500 hover:text-primary-400">Ver detalhes</router-link>
+      </div>
+      <div class="space-y-5">
+        <div v-for="b in financeStore.budgets" :key="b.id">
+          <div class="flex justify-between items-center mb-1.5">
+            <span class="text-sm font-medium text-content-muted">{{ b.category }}</span>
+            <span class="text-xs">
+              <span :class="getCurrentMonthSpent(b) > b.limit ? 'text-danger font-bold' : 'text-content-muted'">
+                {{ formatCurrency(getCurrentMonthSpent(b)) }}
+              </span>
+              <span class="text-content-faint"> / {{ formatCurrency(b.limit) }}</span>
+            </span>
+          </div>
+          <div class="h-2 w-full bg-app-bg rounded-full overflow-hidden border border-app-border">
+            <div 
+              class="h-full rounded-full transition-all duration-1000"
+              :class="getCurrentMonthSpent(b) > b.limit ? 'bg-danger' : 'bg-success'"
+              :style="{ width: Math.min((getCurrentMonthSpent(b) / b.limit) * 100, 100) + '%' }"
+            ></div>
           </div>
         </div>
       </div>
@@ -151,5 +179,12 @@ const formatDate = (dateStr) => {
 const isLate = (dateStr) => {
   if (isToday(parseISO(dateStr))) return false
   return isPast(parseISO(dateStr))
+}
+
+const getCurrentMonthSpent = (budget) => {
+  const currentMonthStr = new Date().toISOString().substring(0, 7) // "YYYY-MM"
+  return financeStore.transactions
+    .filter(t => t.type === 'expense' && t.category === budget.category && t.date.startsWith(currentMonthStr))
+    .reduce((sum, t) => sum + t.amount, 0)
 }
 </script>

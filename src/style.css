@@ -5,9 +5,67 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    @apply bg-dark-900 text-slate-100 font-sans antialiased;
+  :root {
+    /* Tema Padrão (True Dark) */
+    --color-app-bg: #09090b;
+    --color-app-surface: #18181b;
+    --color-app-surface-hover: #27272a;
+    --color-app-border: #27272a;
+    --color-app-border-hover: #3f3f46;
+
+    --color-content-main: #fafafa;
+    --color-content-muted: #a1a1aa;
+    --color-content-faint: #71717a;
+    
+    --color-primary-500: #4f46e5;
+    --color-primary-600: #4338ca;
+    --color-highlight: #4f46e5;
   }
+
+  [data-theme="light"] {
+    /* Tema Claro */
+    --color-app-bg: #f8fafc;
+    --color-app-surface: #ffffff;
+    --color-app-surface-hover: #f1f5f9;
+    --color-app-border: #e2e8f0;
+    --color-app-border-hover: #cbd5e1;
+
+    --color-content-main: #0f172a;
+    --color-content-muted: #475569;
+    --color-content-faint: #64748b;
+    
+    --color-primary-500: #6366f1;
+    --color-primary-600: #4f46e5;
+    --color-highlight: #6366f1;
+  }
+
+  [data-theme="premium"] {
+    /* Tema Premium (Azul + Roxo Fintech) */
+    --color-app-bg: #0F172A;
+    --color-app-surface: #1E293B;
+    --color-app-surface-hover: #334155;
+    --color-app-border: #334155;
+    --color-app-border-hover: #475569;
+
+    --color-content-main: #E2E8F0;
+    --color-content-muted: #94A3B8;
+    --color-content-faint: #64748B;
+    
+    --color-primary-500: #3B82F6; /* Azul Escuro/Royal */
+    --color-primary-600: #8B5CF6; /* Roxo */
+    --color-highlight: #22D3EE;   /* Destaque / Cyan */
+  }
+
+  body {
+    background-color: var(--color-app-bg);
+    color: var(--color-content-main);
+    @apply font-sans antialiased transition-colors duration-300;
+  }
+}
+
+/* Specific component overrides using new colors where needed */
+.text-white {
+  color: #ffffff !important;
 }
 
 /* Custom scrollbar for modern feel */
@@ -16,14 +74,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: var(--color-app-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #334155;
+  background: var(--color-app-border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: var(--color-app-border-hover);
 }

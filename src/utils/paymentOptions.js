@@ -24,16 +24,16 @@ export const handlePayment = async (item, type = 'bill') => {
   const isDebt = type === 'debt';
   
   let html = `<div class="text-left mt-4 mb-2">
-      <label class="block text-sm font-medium text-slate-300 mb-1">De qual conta o dinheiro vai sair?</label>
-      <select id="swal-source" class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500">
+      <label class="block text-sm font-medium text-content-muted mb-1">De qual conta o dinheiro vai sair?</label>
+      <select id="swal-source" class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500">
         ${accountOptions}
       </select>
   </div>`;
 
   if (isDebt) {
     html = `<div class="text-left">
-        <label class="block text-sm font-medium text-slate-300 mb-1">Valor do Pagamento</label>
-        <input id="swal-amount" type="number" step="0.01" class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 mb-4" placeholder="Ex: 150.00" value="${item.installmentAmount || item.balance}">
+        <label class="block text-sm font-medium text-content-muted mb-1">Valor do Pagamento</label>
+        <input id="swal-amount" type="number" step="0.01" class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 mb-4" placeholder="Ex: 150.00" value="${item.installmentAmount || item.balance}">
         ${html}
     </div>`;
   }

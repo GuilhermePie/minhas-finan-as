@@ -1,10 +1,10 @@
 <template>
   <div class="space-y-6 pb-20">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-      <h2 class="text-2xl font-bold text-white">Contas e Cartões</h2>
+      <h2 class="text-2xl font-bold text-content-main">Contas e Cartões</h2>
       <button 
         @click="openModal()"
-        class="px-4 py-2 bg-primary-600 hover:bg-primary-500 text-white rounded-lg font-medium text-sm transition-colors shadow-lg shadow-primary-500/20 w-fit flex items-center gap-2"
+        class="px-4 py-2 bg-primary-600-white rounded-lg font-medium text-sm transition-colors shadow-lg shadow-primary-500/20 w-fit flex items-center gap-2"
       >
         <Plus class="w-4 h-4" /> Nova Conta
       </button>
@@ -12,26 +12,26 @@
 
     <!-- Assets (Contas Bancárias) -->
     <div class="mb-8">
-      <h3 class="text-lg font-medium text-slate-300 mb-4">Minhas Contas</h3>
+      <h3 class="text-lg font-medium text-content-muted mb-4">Minhas Contas</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <div v-for="account in accounts" :key="account.id" class="bg-gradient-to-br from-dark-800 to-dark-900 rounded-2xl p-6 border border-dark-700 shadow-sm hover:border-dark-600 transition-colors relative overflow-hidden group">
+        <div v-for="account in accounts" :key="account.id" class="bg-gradient-to-br from-dark-800 to-dark-900 rounded-2xl p-6 border border-app-border shadow-sm hover:border-app-border-hover transition-colors relative overflow-hidden group">
           <div class="absolute inset-0 bg-primary-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           
           <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-            <button @click="openModal(account)" class="p-1.5 text-slate-400 hover:text-white bg-dark-700 hover:bg-dark-600 rounded-md transition-colors">
+            <button @click="openModal(account)" class="p-1.5 text-content-muted hover:text-content-main bg-app-surface-hover hover:bg-app-border rounded-md transition-colors">
               <Edit2 class="w-4 h-4" />
             </button>
-            <button @click="deleteAccount(account.id)" class="p-1.5 text-slate-400 hover:text-danger bg-dark-700 hover:bg-dark-600 rounded-md transition-colors">
+            <button @click="deleteAccount(account.id)" class="p-1.5 text-content-muted hover:text-danger bg-app-surface-hover hover:bg-app-border rounded-md transition-colors">
               <Trash2 class="w-4 h-4" />
             </button>
           </div>
 
           <div class="relative z-10">
             <div class="flex items-center gap-3 mb-6">
-              <div class="w-10 h-10 rounded-xl bg-dark-700 flex items-center justify-center text-slate-300">
+              <div class="w-10 h-10 rounded-xl bg-app-surface-hover flex items-center justify-center text-content-muted">
                 <Landmark class="w-5 h-5" />
               </div>
-              <h4 class="font-medium text-white pr-16 flex items-center gap-2">
+              <h4 class="font-medium text-content-main pr-16 flex items-center gap-2">
                 {{ account.name }}
                 <span v-if="account.type === 'reserve' || account.isInvestment" class="text-xs bg-primary-500/20 text-primary-400 px-2 py-0.5 rounded-full border border-primary-500/20 shrink-0">
                   Reserva
@@ -42,8 +42,8 @@
               </h4>
             </div>
             <div>
-              <p class="text-sm text-slate-400 mb-1">Saldo Atual</p>
-              <p class="text-2xl font-bold text-white">{{ formatCurrency(account.balance) }}</p>
+              <p class="text-sm text-content-muted mb-1">Saldo Atual</p>
+              <p class="text-2xl font-bold text-content-main">{{ formatCurrency(account.balance) }}</p>
             </div>
           </div>
         </div>
@@ -52,16 +52,16 @@
 
     <!-- Debts (Cartões e Ferramentas) -->
     <div>
-      <h3 class="text-lg font-medium text-slate-300 mb-4">Cartões de Crédito e Empréstimos</h3>
+      <h3 class="text-lg font-medium text-content-muted mb-4">Cartões de Crédito e Empréstimos</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        <div v-for="debt in debts" :key="debt.id" class="bg-gradient-to-br from-dark-800 to-dark-900 rounded-2xl p-6 border border-dark-700 shadow-sm hover:border-danger/20 transition-colors relative overflow-hidden group">
+        <div v-for="debt in debts" :key="debt.id" class="bg-gradient-to-br from-dark-800 to-dark-900 rounded-2xl p-6 border border-app-border shadow-sm hover:border-danger/20 transition-colors relative overflow-hidden group">
           <div class="absolute inset-0 bg-danger/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
           
           <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity z-20">
-            <button @click="openModal(debt)" class="p-1.5 text-slate-400 hover:text-white bg-dark-700 hover:bg-dark-600 rounded-md transition-colors">
+            <button @click="openModal(debt)" class="p-1.5 text-content-muted hover:text-content-main bg-app-surface-hover hover:bg-app-border rounded-md transition-colors">
               <Edit2 class="w-4 h-4" />
             </button>
-            <button @click="deleteAccount(debt.id)" class="p-1.5 text-slate-400 hover:text-danger bg-dark-700 hover:bg-dark-600 rounded-md transition-colors">
+            <button @click="deleteAccount(debt.id)" class="p-1.5 text-content-muted hover:text-danger bg-app-surface-hover hover:bg-app-border rounded-md transition-colors">
               <Trash2 class="w-4 h-4" />
             </button>
           </div>
@@ -69,12 +69,12 @@
           <div class="relative z-10">
             <div class="flex items-center justify-between mb-4">
               <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-dark-700 flex items-center justify-center text-slate-300 shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-app-surface-hover flex items-center justify-center text-content-muted shrink-0">
                   <CreditCard class="w-5 h-5" />
                 </div>
-                <h4 class="font-medium text-white truncate pr-14 flex items-center gap-2">
+                <h4 class="font-medium text-content-main truncate pr-14 flex items-center gap-2">
                   {{ debt.name }}
-                  <span v-if="debt.isInstallment && debt.totalInstallments" class="text-xs bg-dark-700 text-slate-300 px-2 py-0.5 rounded-full border border-dark-600 truncate no-underline">
+                  <span v-if="debt.isInstallment && debt.totalInstallments" class="text-xs bg-app-surface-hover text-content-muted px-2 py-0.5 rounded-full border border-app-border-hover truncate no-underline">
                     {{ debt.currentInstallment }}/{{ debt.totalInstallments }}
                   </span>
                 </h4>
@@ -82,7 +82,7 @@
             </div>
             <div class="flex items-end justify-between">
               <div>
-                <p class="text-sm text-slate-400 mb-1">Fatura Atual / Dívida Total</p>
+                <p class="text-sm text-content-muted mb-1">Fatura Atual / Dívida Total</p>
                 <p class="text-2xl font-bold text-danger">{{ formatCurrency(debt.balance) }}</p>
               </div>
               <button 
@@ -101,21 +101,21 @@
     <Modal :isOpen="isModalOpen" :title="editingAccount ? 'Editar Conta' : 'Nova Conta'" @close="closeModal">
       <form @submit.prevent="saveAccount" class="space-y-4 pb-2">
         <div>
-          <label class="block text-sm font-medium text-slate-400 mb-1">Nome da Conta</label>
+          <label class="block text-sm font-medium text-content-muted mb-1">Nome da Conta</label>
           <input 
             v-model="form.name" 
             type="text" 
             required
-            class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+            class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 transition-colors"
             placeholder="Ex: Nubank, Itaú..."
           />
         </div>
         
         <div>
-          <label class="block text-sm font-medium text-slate-400 mb-1">Tipo</label>
+          <label class="block text-sm font-medium text-content-muted mb-1">Tipo</label>
           <select 
             v-model="form.type"
-            class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors appearance-none"
+            class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 transition-colors appearance-none"
           >
             <option value="checking">Conta Corrente</option>
             <option value="investment">Investimento</option>
@@ -126,64 +126,64 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-slate-400 mb-1">Saldo Atual / Dívida Total (R$)</label>
+          <label class="block text-sm font-medium text-content-muted mb-1">Saldo Atual / Dívida Total (R$)</label>
           <input 
             v-model.number="form.balance" 
             type="number" 
             step="0.01" 
             required
-            class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+            class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 transition-colors"
             placeholder="0.00"
           />
         </div>
 
         <div v-if="['loan', 'credit_card', 'debt'].includes(form.type)">
-          <label class="block text-sm font-medium text-slate-400 mb-1">Data de Vencimento da Fatura/Parcela</label>
+          <label class="block text-sm font-medium text-content-muted mb-1">Data de Vencimento da Fatura/Parcela</label>
           <input 
             v-model="form.dueDate" 
             type="date" 
-            class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors mb-2"
+            class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 transition-colors mb-2"
           />
         </div>
 
-        <div v-if="['loan', 'credit_card', 'debt'].includes(form.type)" class="pt-2 border-t border-dark-700 mt-4">
+        <div v-if="['loan', 'credit_card', 'debt'].includes(form.type)" class="pt-2 border-t border-app-border mt-4">
           <div class="flex items-center gap-3 mb-4">
             <label class="relative inline-flex items-center cursor-pointer">
               <input type="checkbox" v-model="form.isInstallment" class="sr-only peer">
-              <div class="w-11 h-6 bg-dark-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
-              <span class="ml-3 text-sm font-medium text-slate-300">É um financiamento parcelado?</span>
+              <div class="w-11 h-6 bg-app-surface-hover peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-500"></div>
+              <span class="ml-3 text-sm font-medium text-content-muted">É um financiamento parcelado?</span>
             </label>
           </div>
 
           <div v-if="form.isInstallment" class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-slate-400 mb-1">Parcela Atual</label>
+              <label class="block text-sm font-medium text-content-muted mb-1">Parcela Atual</label>
               <input 
                 v-model.number="form.currentInstallment" 
                 type="number" 
                 min="1"
-                class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+                class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 transition-colors"
                 placeholder="Ex: 1"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-slate-400 mb-1">Total de Parcelas</label>
+              <label class="block text-sm font-medium text-content-muted mb-1">Total de Parcelas</label>
               <input 
                 v-model.number="form.totalInstallments" 
                 type="number" 
                 min="2"
-                class="w-full bg-dark-900 border border-dark-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-primary-500 transition-colors"
+                class="w-full bg-app-bg border border-app-border rounded-lg px-4 py-2.5 text-content-main focus:outline-none focus:border-primary-500 transition-colors"
                 placeholder="Ex: 12"
               />
             </div>
           </div>
         </div>
 
-        <div class="pt-4 flex justify-end gap-3 border-t border-dark-700 mt-4">
-          <button type="button" @click="closeModal" class="px-4 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-dark-700 transition-colors">
+        <div class="pt-4 flex justify-end gap-3 border-t border-app-border mt-4">
+          <button type="button" @click="closeModal" class="px-4 py-2 rounded-lg text-sm font-medium text-content-muted hover:text-content-main hover:bg-app-surface-hover transition-colors">
             Cancelar
           </button>
-          <button type="submit" class="px-4 py-2 rounded-lg text-sm font-medium text-white bg-primary-600 hover:bg-primary-500 transition-colors">
+          <button type="submit" class="px-4 py-2 rounded-lg text-sm font-medium text-content-main bg-primary-600 hover:bg-primary-500 transition-colors">
             Salvar
           </button>
         </div>

@@ -2,11 +2,11 @@
   <Teleport to="body">
     <transition name="modal">
       <div v-if="isOpen" class="fixed inset-0 z-50 flex justify-center items-center px-4" @click.self="close">
-        <div class="absolute inset-0 bg-dark-900/80 backdrop-blur-sm transition-opacity" @click="close"></div>
-        <div class="relative bg-dark-800 border border-dark-700 rounded-2xl shadow-xl w-full max-w-md p-6 transform transition-all flex flex-col max-h-[90vh]">
+        <div class="absolute inset-0 bg-app-bg/80 backdrop-blur-sm transition-opacity" @click="close"></div>
+        <div class="relative bg-app-surface border border-app-border rounded-2xl shadow-xl w-full max-w-md p-6 transform transition-all flex flex-col max-h-[90vh]">
           <div class="flex items-center justify-between mb-5 shrink-0">
-            <h3 class="text-xl font-bold text-white">{{ title }}</h3>
-            <button @click="close" class="text-slate-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-dark-700">
+            <h3 class="text-xl font-bold text-content-main">{{ title }}</h3>
+            <button @click="close" class="text-content-muted hover:text-content-main transition-colors p-1 rounded-lg hover:bg-app-surface-hover">
               <X class="w-5 h-5" />
             </button>
           </div>

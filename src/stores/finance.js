@@ -6,7 +6,9 @@ export const useFinanceStore = defineStore('finance', {
     debts: 0,
     transactions: [],
     bills: [],
-    accounts: []
+    accounts: [],
+    budgets: [],
+    theme: 'midnight'
   }),
   getters: {
     totalIncome: (state) => state.transactions.filter(t => t.type === 'income').reduce((acc, t) => acc + t.amount, 0),
@@ -152,7 +154,11 @@ export const useFinanceStore = defineStore('finance', {
           accountId: sourceAccountId
         })
 
-        if (bill.isInstallment && bill.currentInstallment < bill.totalInstallments) {
+        if (bill.isFixed) {
+          const dateObj = new Date(bill.dueDate)
+          dateObj.setUTCMonth(dateObj.getUTCMonth() + 1)
+          bill.dueDate = dateObj.toISOString().split('T')[0]
+        } else if (bill.isInstallment && bill.currentInstallment < bill.totalInstallments) {
           bill.currentInstallment++
           // Move due date 1 month forward
           const dateObj = new Date(bill.dueDate)
@@ -162,6 +168,23 @@ export const useFinanceStore = defineStore('finance', {
           bill.paid = true
         }
       }
+    },
+    
+    // Budgets
+    addBudget(budget) {
+      if (!this.budgets) this.budgets = []
+      this.budgets.push({ id: Date.now(), ...budget })
+    },
+    editBudget(id, updatedBudget) {
+      if (!this.budgets) this.budgets = []
+      const index = this.budgets.findIndex(b => b.id === id)
+      if (index !== -1) {
+        this.budgets[index] = { ...this.budgets[index], ...updatedBudget }
+      }
+    },
+    deleteBudget(id) {
+      if (!this.budgets) this.budgets = []
+      this.budgets = this.budgets.filter(b => b.id !== id)
     },
     
     // Utilities
