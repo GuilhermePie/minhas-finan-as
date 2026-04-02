@@ -178,16 +178,13 @@
               <option value="" disabled>Selecione uma categoria</option>
               <option value="Alimentação">Alimentação</option>
               <option value="Transporte">Transporte</option>
-              <option value="Moradia">Moradia</option>
+              <option value="Fast Food">Fast Food</option>
+              <option value="Gastos Fixos">Gastos Fixos</option>
+              <option value="Pet">Pet</option>
               <option value="Saúde">Saúde</option>
-              <option value="Educação">Educação</option>
+              <option value="Restaurante">Restaurante</option>
               <option value="Lazer">Lazer</option>
               <option value="Compras">Compras</option>
-              <option value="Contas">Contas</option>
-              <option value="Salário">Salário</option>
-              <option value="Transferência">Transferência</option>
-              <option value="Renda Extra">Renda Extra</option>
-              <option value="Outros">Outros</option>
             </select>
           </div>
           <div>

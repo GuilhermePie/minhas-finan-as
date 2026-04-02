@@ -47,7 +47,7 @@ export const useFinanceStore = defineStore('finance', {
         this.addTransaction({
           type: 'expense',
           amount: amount,
-          category: 'Contas',
+          category: 'Gastos Fixos',
           date: new Date().toISOString().split('T')[0],
           description: desc,
           accountId: sourceAccountId
@@ -148,7 +148,7 @@ export const useFinanceStore = defineStore('finance', {
         this.addTransaction({
           type: 'expense',
           amount: bill.amount,
-          category: 'Contas',
+          category: 'Gastos Fixos',
           date: new Date().toISOString().split('T')[0],
           description: desc,
           accountId: sourceAccountId
